@@ -11,7 +11,7 @@ A CLI tool to scaffold a fully configured Next.js project with TypeScript, MUI, 
 * Cleans up default files and structure from `create-next-app`
 * Preconfigured `page.tsx` and `layout.tsx`
 
-![Hexagonal Architecture](public/hexagonal-architecture.png)
+![Hexagonal Architecture](public/hexagonal_architecture.png)
 
 ## Prerequisites
 
