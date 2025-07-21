@@ -1,6 +1,6 @@
 # Next.js Hexagonal Architecture CLI
 
-A CLI tool to scaffold a fully configured Next.js project with TypeScript, MUI, Prisma, and a clean **Hexagonal Architecture**.
+A CLI tool to create a fully configured Next.js project with TypeScript, MUI, Prisma, and a clean **Hexagonal Architecture**.
 
 ## Features
 
