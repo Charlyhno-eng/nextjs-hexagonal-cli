@@ -7,6 +7,7 @@ if [ -z "$APP_NAME" ]; then
   exit 1
 fi
 
+# Crée le projet Next.js en mode app router avec TypeScript, sans Tailwind, avec ESLint
 npx create-next-app@latest "$APP_NAME" \
   --typescript \
   --eslint \
@@ -39,7 +40,7 @@ echo "Creating hexagonal architecture folder structure..."
 
 mkdir -p \
   app/api \
-  app/ui \
+  app/pages \
   components \
   core/domain \
   core/use-cases \
@@ -51,7 +52,10 @@ mkdir -p \
   shared \
   public \
   styles \
-  tests
+  tests \
+  utils
+
+touch utils/reusableFunctions.ts
 
 echo "Removing unnecessary files from app/..."
 
