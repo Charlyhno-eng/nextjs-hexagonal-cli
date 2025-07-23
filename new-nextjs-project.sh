@@ -7,15 +7,13 @@ if [ -z "$APP_NAME" ]; then
   exit 1
 fi
 
-# Create Next.js app with predefined answers
-expect <<EOF
-spawn npx create-next-app@latest $APP_NAME --typescript --eslint --no-tailwind --no-src-dir --app
-expect "Would you like to use Turbopack"
-send "No\r"
-expect "Would you like to customize the import alias"
-send "No\r"
-expect eof
-EOF
+npx create-next-app@latest "$APP_NAME" \
+  --typescript \
+  --eslint \
+  --no-tailwind \
+  --no-src-dir \
+  --app \
+  --import-alias "@/"
 
 echo "Next.js project '$APP_NAME' created successfully."
 echo "Installing MUI, Emotion, Prisma and @prisma/client..."
@@ -34,6 +32,7 @@ echo "Moving schema.prisma to infrastructure/orm/prisma and cleaning up..."
 
 mkdir -p infrastructure/orm/prisma
 mv prisma/schema.prisma infrastructure/orm/prisma/
+mv prisma/.env .env 2>/dev/null
 rm -rf prisma
 
 echo "Creating hexagonal architecture folder structure..."
@@ -61,12 +60,11 @@ rm -f app/page.module.css
 
 echo "Moving app/globals.css to styles/..."
 
-mv app/globals.css styles/globals.css
+mv app/globals.css styles/globals.css 2>/dev/null
 
 echo "Cleaning public/ folder..."
 
-# Remove all files in public folder
-find public/* -type f -exec rm -f {} +
+find public -type f -delete
 
 echo "Project '$APP_NAME' initialization complete."
 
@@ -86,18 +84,7 @@ echo "Updating app/layout.tsx..."
 
 cat > app/layout.tsx <<EOL
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "$APP_NAME",
@@ -111,7 +98,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={\`\${geistSans.variable} \${geistMono.variable}\`}>
+      <body>
         {children}
       </body>
     </html>

@@ -20,11 +20,6 @@ This tool is intended for **Linux** users.
 You need to have the following installed:
 
 * Node.js and npm
-* `expect` package:
-
-```bash
-sudo apt-get install expect
-```
 
 ## Installation
 
@@ -44,14 +39,29 @@ chmod +x ~/.local/bin/new-nextjs-project
 Simply run:
 
 ```bash
-new-nextjs-project <project-name>
+new-nextjs-project.sh <project-name>
 ```
 
 Example:
 
 ```bash
-new-nextjs-project my-awesome-app
+new-nextjs-project.sh my-awesome-app
 ```
+
+When the script launches, it will run `npx create-next-app`.
+You’ll need to **manually answer 2 or 3 prompts**, such as:
+
+* Whether to use **Turbopack** (answer `No`)
+* Whether to customize the **import alias** (answer `No`)
+
+After answering those, the script will automatically resume and:
+
+* Install MUI and Prisma dependencies
+* Initialize Prisma
+* Move the Prisma schema to the proper folder
+* Set up a full Hexagonal Architecture folder structure
+* Clean up the default files
+* Replace `page.tsx` and `layout.tsx` with custom minimal MUI-based components
 
 This will generate a complete project with the following structure:
 
@@ -86,9 +96,3 @@ This will generate a complete project with the following structure:
 │
 └── tests/              # Unit and integration tests
 ```
-
-## Notes
-
-* The `public/` folder is cleaned of all default Next.js icons and files.
-* The default `app/page.tsx` and `app/layout.tsx` are replaced with custom minimal versions using MUI and project metadata.
-* Prisma schema is placed directly in `infrastructure/orm/prisma/schema.prisma`.
