@@ -40,7 +40,7 @@ echo "Creating hexagonal architecture folder structure..."
 
 mkdir -p \
   app/api \
-  app/pages \
+  app/"(pages)" \
   components \
   core/domain \
   core/use-cases \
@@ -49,13 +49,14 @@ mkdir -p \
   infrastructure/repositories \
   infrastructure/services \
   infrastructure/config \
-  shared \
   public \
+  shared/types \
   styles \
-  tests \
-  utils
+  tests
 
 touch utils/reusableFunctions.ts
+touch shared/constants.ts
+touch shared/helpers.ts
 
 echo "Removing unnecessary files from app/..."
 
